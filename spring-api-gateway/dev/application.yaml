@@ -6,7 +6,7 @@ spring:
     gateway:
       discovery:
         locator:
-#          enabled: true
+          enabled: true
           lower-case-service-id: true
       default-filters:
         - name: Retry
@@ -19,31 +19,31 @@ spring:
               maxBackoff: 100ms
               factor: 2
               basedOnPreviousValue: false
-      routes:
-        - id: product-service
-          uri: lb://spring-product-stock
-          predicates:
-            - Path=/stock/**
-          filters:
-            - name: CircuitBreaker
-              args:
-                name: stock_CB
-                slidingWindowSize: 20
-                permittedNumberOfCallsInHalfOpenState: 5
-                failureRateThreshold: 50
-                waitDurationInOpenState: 15000
-        - id: order-service
-          uri: lb://spring-product-order
-          predicates:
-            - Path=/orders/**
-          filters:
-            - name: CircuitBreaker
-              args:
-                name: orders_CB
-                slidingWindowSize: 20
-                permittedNumberOfCallsInHalfOpenState: 5
-                failureRateThreshold: 50
-                waitDurationInOpenState: 15000
+#      routes:
+#        - id: product-service
+#          uri: lb://spring-product-stock
+#          predicates:
+#            - Path=/stock/**
+#          filters:
+#            - name: CircuitBreaker
+#              args:
+#                name: stock_CB
+#                slidingWindowSize: 20
+#                permittedNumberOfCallsInHalfOpenState: 5
+#                failureRateThreshold: 50
+#                waitDurationInOpenState: 15000
+#        - id: order-service
+#          uri: lb://spring-product-order
+#          predicates:
+#            - Path=/orders/**
+#          filters:
+#            - name: CircuitBreaker
+#              args:
+#                name: orders_CB
+#                slidingWindowSize: 20
+#                permittedNumberOfCallsInHalfOpenState: 5
+#                failureRateThreshold: 50
+#                waitDurationInOpenState: 15000
 
 eureka:
   instance:
